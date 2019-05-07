@@ -12,7 +12,11 @@
 > + Ubuntu server
 > + PostgreSQL(https://www.postgresql.org/)
 > + Web Application
-
+# IP & Hostname
+URL: www.savionj.com
+Host Name: http://35.173.115.27
+IP Adress: 35.173.115.27
+Port: 2200
 # Get your server
 ### Start a new Ubuntu Linux server
 + Create an account and into Amazon Lightsail 
