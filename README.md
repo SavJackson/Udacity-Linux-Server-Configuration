@@ -6,17 +6,18 @@
 ### What will I learned
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
-# IP & Hostname
-Host Name/URL: www.savionj.com,  http://35.173.115.27 <br/>
-IP Adress: 35.173.115.27 <br/>
-Port: 2200 <br/> 
-
 # Prerequisites 
 > + [AWS Account](https://aws.amazon.com/lightsail/)
 > + [Vagrant](https://www.vagrantup.com/)
 > + Ubuntu server
 > + [PostgreSQL](https://www.postgresql.org/)
 > + Web Application
+
+# IP & Hostname
+URL: www.savionj.com <br/>
+Host Name: http://35.173.115.27 <br/>
+IP Adress: 35.173.115.27 <br/>
+Port: 2200 <br/> 
 
 # Get your server
 ### Start a new Ubuntu Linux server
@@ -35,6 +36,7 @@ Port: 2200 <br/>
 + Rename to LightsailDefaultKey.pem
 + Copy to shared vagrant folder 
 <img src="Screenshots/Create private Key.jpg">
+
 #### Within Vagrant Box
 + cd /vagrant
 + sudo mv LightsailDefaultKey.pem ~/.ssh/
@@ -64,7 +66,9 @@ Port: 2200 <br/>
 1. Click __networking__ within your AWS Instance
 2. Under Firewall, click 'Add another'
 3. Add a custom TCP with port 2200
+
 <img src="Screenshots/Lightsail2.jpg">
+
 #### Within Vagrant Box
 ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p 2200
 
@@ -127,6 +131,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 ## Configure local timezone
 #### Within Vagrant Box
 > sudo dpkg-reconfigure tzdata
+
  <img src="Screenshots/Set time.jpg">
   
 # Install Apache
@@ -271,7 +276,9 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 + Edit Google app settings
 + Download and save new cliet_secrets.json
 + Edit GoDaddy domain DNS to point to IP address
+
 <img src="Screenshots/Setu DNS.jpg">
+
 #### Edit the client_secrets.json
 ```
 sudo nano /var/www/catalog/catalog/client_secrets.json
