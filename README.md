@@ -29,13 +29,13 @@ Port: 2200 <br/>
 + Click the 'Create' button to create the instance.
 + Wait for the instance to start up
 + Attach a static IP
+<img src="Screenshots/Lightsail1.jpg">
 
 # SSH into your server
 #### Within your Lightsail terminal 
 + Download default key
 + Rename to LightsailDefaultKey.pem
 + Copy to shared vagrant folder 
-<img src="Screenshots/Create private Key.jpg">
 
 #### Within Vagrant Box
 + cd /vagrant
@@ -67,7 +67,7 @@ Port: 2200 <br/>
 2. Under Firewall, click 'Add another'
 3. Add a custom TCP with port 2200
 
-<img src="Screenshots/Lightsail2.jpg">
+<img src="Screenshots/Firewall.jpg">
 
 #### Within Vagrant Box
 ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p 2200
@@ -106,7 +106,10 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 
 + ssh-keygen -f ~/.ssh/*linuxCourse*
 + cat ~/.ssh/linuxCourse.pub
+
 > Copy the key to clipboard
+
+<img src="Screenshots/Create private Key.jpg">
 
 ### Within Lightsail remote VM
 
@@ -146,7 +149,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > psql by default disables the remote connections, but we still need to make sure <br/>
 
-<img src="Screenshots/Test Query.jpg">
+<img src="Screenshots/verifiy database config.jpg">
 
 # Create a catalog user
 + sudo adduser catalog (pwd:catalog)
@@ -204,7 +207,8 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 Select * from category 
 \q
 ```
-<img src="Screenshots/verifiy database config.jpg">
+<img src="Screenshots/Test Query.jpg">
+
 
 > __Fix any errors/typos before moving on__
 
