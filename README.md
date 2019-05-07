@@ -7,10 +7,10 @@
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
 # IP & Hostname
-URL: www.savionj.com <br/>
-Host Name: http://35.173.115.27 <br/>
-IP Adress: 35.173.115.27 <br/>
-Port: 2200 <br/> 
++ URL: www.savionj.com <br/>
++ Host Name: http://35.173.115.27 <br/>
++ IP Adress: 35.173.115.27 <br/>
++ Port: 2200 <br/> 
 
 # Prerequisites 
 > + [AWS Account](https://aws.amazon.com/lightsail/)
@@ -162,7 +162,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo -u postgres psql
 > The prompt should say postgres=# 
 ``` postgres
-  CREATE USER catalog WITH PASSWORD 'catalog'; <br/>
+  CREATE USER catalog WITH PASSWORD 'catalog'; 
   ALTER User catalog CREATEDB; <br/>
 
   \q
@@ -182,15 +182,15 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo apt-get install python3-pip
 + sudo apt-get install python-virtualenv
 + cd /var/www/catalog/catalog 
-+ sudo virtualenv -p python3 venv3 <br/>
-+ sudo chown -R grader:grader venv3/<br/>
++ sudo virtualenv -p python3 venv3 
++ sudo chown -R grader:grader venv3/
 
 + source venv3/bin/activate
 
 > Installs 
 ``` ssh 
 > pip3 install httplib2 
-> pip3 install requests <br/>
+> pip3 install requests
 > pip3 install --upgrade oauth2client 
 > pip3 install sqlalchemy 
 > pip3 install flask 
@@ -227,21 +227,21 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
 > Add or edit the text below 
 ``` 
 <VirtualHost *:80> <br/>
-    ServerName [*your static ip*]  <br/>
-    WSGIScriptAlias / /var/www/catalog/catalog.wsgi <br/>
-    <Directory /var/www/catalog/catalog/> <br/>
-        Order allow,deny  <br/>
-        Allow from all  <br/>
-    </Directory>  <br/>
-    Alias /static /var/www/catalog/catalog/static <br/>
-    <Directory /var/www/catalog/catalog/static/>  <br/>
-        Order allow,deny  <br/>
-        Allow from all  <br/>
-    </Directory>  <br/>
-    ErrorLog ${APACHE_LOG_DIR}/error.log  <br/>
-    LogLevel warn <br/>
-    CustomLog ${APACHE_LOG_DIR}/access.log combined <br/>
-</VirtualHost>  <br/>
+    ServerName [*your static ip*] 
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi 
+    <Directory /var/www/catalog/catalog/> 
+        Order allow,deny 
+        Allow from all 
+    </Directory>  
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/> 
+        Order allow,deny
+        Allow from all  
+    </Directory>  
+    ErrorLog ${APACHE_LOG_DIR}/error.log  
+    LogLevel warn 
+    CustomLog ${APACHE_LOG_DIR}/access.log combined 
+</VirtualHost>  
 ```
 # Disable the default Apache site
  + sudo a2dissite 000-default.conf
@@ -275,7 +275,7 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 + sudo chown -R www-data:www-data catalog/
 + sudo service apache2 restart
 
-> Go to the browser and enter http://your.static.ip 
+> Go to the browser and enter www.savionj.com
 
 # Fixing Google Login 
 + Edit Google app settings
