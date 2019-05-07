@@ -6,6 +6,10 @@
 ### What will I learned
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
+# Prerequisites 
+> + [AWS Account](https://aws.amazon.com/lightsail/) <br/>
+> + [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) <br/>
+> + [WinSCP](https://winscp.net/eng/index.php) <br/>
 # Get your server
 ### Start a new Ubuntu Linux server
 + Create an account and into Amazon Lightsail 
@@ -46,11 +50,11 @@
   {Picture Here}
 + confirm line that says PasswordAuthentication is set to 'no'
 + sudo service ssh restart
-+ logout of Lightsail terminal
++ log out of Lightsail terminal
 
 #### While on the Lightsail website
 1. Click __networking__ within your AWS Instance
-2. Under firewall, clic 'Add another'
+2. Under Firewall, click 'Add another'
 3. Add a custom TCP with port 2200
 
 #### Within Vagrant Box
@@ -66,7 +70,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + sudo ufw allow 2200/tcp
 + sudo ufw allow www
 + sudo ufw allow 123/udp
-+	sudo ufw enable
++    sudo ufw enable
 
 # Create a grader user
 ### Within lightsail remote VM
@@ -75,24 +79,24 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + sudo adduser grader
 
 # Give the grader permission to sudo
-### Within lightsail remote 
+### Within Lightsail remote VM
 
 + sudo touch /etc/sudoers.d/grader
 + sudo nano /etc/sudoers.d/grader 
 > type in grader ALL=(ALL:ALL) ALL <br/>
 
-> verify newuser has sudo access
-+ su newuser
+> verify grader has sudo access
++ su grader
 + sudo -l
 
-# Create an SSH key pair for newuser
+# Create an SSH key pair for grader
 #### Within Vagrant Box
 
 1. ssh-keygen -f ~/.ssh/*linuxCourse*
 2. cat ~/.ssh/linuxCourse.pub
 > Copy the key to clipboard
 
-### Within lightsail remote VM
+### Within Lightsail remote VM
 
 + cd /home/grader
 + sudo mkdir .ssh
@@ -126,7 +130,7 @@ ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
 # Install Postgres
 + sudo apt-get install postgresql
 > Edit the pg_hba.conf
-sudo nano /etc/postgresql/9.5/main/pg_hba.conf
+sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > psql by default disables the remote connections, but we still need to make sure <br/>
 [PICTURE HERE]
 
@@ -139,9 +143,9 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf
 # Create catalog database role and privileges
 
 + sudo -u postgres psql
-> The prompt should say postgres=# 
-  CREATE USER catalog WITH PASSWORD 'catalog';
-  ALTER User catalog CREATEDB;
+> The prompt should say postgres=# <br/>
+  CREATE USER catalog WITH PASSWORD 'catalog'; <br/>
+  ALTER User catalog CREATEDB; <br/>
 
   \q
 
@@ -160,11 +164,11 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf
 + sudo apt-get install python3-pip
 + sudo apt-get install python-virtualenv
 + cd /var/www/catalog/catalog 
-+ sudo virtualenv -p python3 venv3
++ sudo virtualenv -p python3 venv3 <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
-> Installs 
+> Installs <br/>
 > pip3 install httplib2 <br/>
 > pip3 install requests <br/>
 > pip3 install --upgrade oauth2client <br/>
@@ -184,7 +188,7 @@ Select * from category <br/>
 > quit
 \q
 
-> Fix any errors/typos before moving on
+> __Fix any errors/typos before moving on__
 
 > Deactivate the virtual environment
 + deactivate
@@ -250,4 +254,4 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 + sudo chown -R www-data:www-data catalog/
 + sudo service apache2 restart
 
-{go to the broser and enter http://your.static.ip }
+> Go to the browser and enter http://your.static.ip }
