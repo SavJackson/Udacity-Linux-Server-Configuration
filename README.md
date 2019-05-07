@@ -116,7 +116,7 @@ ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
 >  Can log into remote server as grader
 
 # Preration for project deployment 
-## Configure local timeone
+## Configure local timezone
 #### Within Vagrant Box
 > sudo dpkg-reconfigure tzdata
   [pictere here! ]
