@@ -10,7 +10,7 @@
 > + [AWS Account](https://aws.amazon.com/lightsail/)
 > + [Vagrant](https://www.vagrantup.com/)
 > + Ubuntu server
-> + PostgreSQL(https://www.postgresql.org/)
+> + [PostgreSQL](https://www.postgresql.org/)
 > + Web Application
 # IP & Hostname
 URL: www.savionj.com
