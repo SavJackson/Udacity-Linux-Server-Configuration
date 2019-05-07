@@ -7,10 +7,10 @@
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
 # IP & Hostname
-+ URL: www.savionj.com <br/>
-+ Host Name: http://35.173.115.27 <br/>
-+ IP Adress: 35.173.115.27 <br/>
-+ Port: 2200 <br/> 
+> + URL: www.savionj.com <br/>
+> + Host Name: http://35.173.115.27 <br/>
+> + IP Adress: 35.173.115.27 <br/>
+> + Port: 2200 <br/> 
 
 # Prerequisites 
 > + [AWS Account](https://aws.amazon.com/lightsail/)
