@@ -282,7 +282,7 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 + Download and save new cliet_secrets.json
 + Edit GoDaddy domain DNS to point to IP address
 
-<img src="Screenshots/Setu DNS.jpg">
+<img src="Screenshots/Google OAuth.jpg">
 
 #### Edit the client_secrets.json
 ```
@@ -293,4 +293,9 @@ sudo nano /var/www/catalog/catalog/client_secrets.json
 
 + Launch the app again using the DNS and test the login button
 
-<img src="Screenshots/Google OAuth.jpg">
+Google oauth 2.0 credentials no longer accept xip.io and I could not find any way around not 
+having a public top level domain for google to accept for oauth. So I register my own [domain](www.savionj.com) and pointed my domaian's DNS to my Lighsail server IP address. 
+
+<img src="Screenshots/Setu DNS.jpg">
+
+
