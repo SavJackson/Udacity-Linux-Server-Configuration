@@ -8,8 +8,8 @@
 
 # Prerequisites 
 > + [AWS Account](https://aws.amazon.com/lightsail/) <br/>
-> + [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) <br/>
-> + [WinSCP](https://winscp.net/eng/index.php) <br/>
+> + [Vagrant]
+
 # Get your server
 ### Start a new Ubuntu Linux server
 + Create an account and into Amazon Lightsail 
@@ -47,7 +47,7 @@
 
 + sudo nano /etc/ssh/sshd_config
 + uncomment and change the port number on line 41 from 22 to 2200
-  <img src="Screenshots/portChange.JPG">
+  <img src="Screenshots/portChange.jpg">
 + confirm line that says PasswordAuthentication is set to 'no'
 + sudo service ssh restart
 + log out of Lightsail terminal
@@ -70,7 +70,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + sudo ufw allow 2200/tcp
 + sudo ufw allow www
 + sudo ufw allow 123/udp
-+    sudo ufw enable
++ sudo ufw enable
 
 # Create a grader user
 ### Within lightsail remote VM
@@ -143,12 +143,13 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 # Create catalog database role and privileges
 
 + sudo -u postgres psql
-> The prompt should say postgres=# <br/>
+> The prompt should say postgres=# 
+``` postgres
   CREATE USER catalog WITH PASSWORD 'catalog'; <br/>
   ALTER User catalog CREATEDB; <br/>
 
   \q
-
+```
 # Install Git
 + sudo apt-get install git
 ## Clone app from GitHub
@@ -168,17 +169,17 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
-``` ssh
-> Installs <br/>
-> pip3 install httplib2 <br/>
+
+``` ssh 
+> pip3 install httplib2 
 > pip3 install requests <br/>
-> pip3 install --upgrade oauth2client <br/>
-> pip3 install sqlalchemy <br/>
-> pip3 install flask <br/>
-> pip3 install sqlalchemy-utils <br/>
-> sudo apt-get install libpq-dev <br/>
-> pip3 install psycopg2 <br/>
-> pip3 install Flask-SQLAlchemy <br/>
+> pip3 install --upgrade oauth2client 
+> pip3 install sqlalchemy 
+> pip3 install flask 
+> pip3 install sqlalchemy-utils 
+> sudo apt-get install libpq-dev 
+> pip3 install psycopg2 
+> pip3 install Flask-SQLAlchemy 
 ```
 + sudo -u postgres psql
 
@@ -232,7 +233,7 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
 # Create /var/www/catalog/catalog.wsgi file 
 > Add the following lines <br/>
 > it should read like below <br/>
-
+```python
  activate_this = '/var/www/catalog/catalog/venv3/bin/activate_this.py' <br/>
  with open(activate_this) as file_: <br/>
  exec(file_.read(), dict(__file__=activate_this)) <br/>
@@ -246,7 +247,7 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 
  from catalog import app as application <br/>
  application.secret_key = "super_secret_key" <br/>
-
+```
 > restart apache 
 + sudo service apache2 restart
 
