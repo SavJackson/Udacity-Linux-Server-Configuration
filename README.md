@@ -145,7 +145,8 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 > Edit the pg_hba.conf
 sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > psql by default disables the remote connections, but we still need to make sure <br/>
-[PICTURE HERE]
+
+<img src="Screenshots/Test Query.jpg">
 
 # Create a catalog user
 + sudo adduser catalog (pwd:catalog)
@@ -203,7 +204,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 Select * from category 
 \q
 ```
-<img src="Screenshots/Test Query.jpg">
+<img src="Screenshots/verifiy database config.jpg">
 
 > __Fix any errors/typos before moving on__
 
