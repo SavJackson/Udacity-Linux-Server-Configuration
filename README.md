@@ -168,6 +168,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
+``` ssh
 > Installs <br/>
 > pip3 install httplib2 <br/>
 > pip3 install requests <br/>
@@ -178,7 +179,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > sudo apt-get install libpq-dev <br/>
 > pip3 install psycopg2 <br/>
 > pip3 install Flask-SQLAlchemy <br/>
-
+```
 + sudo -u postgres psql
 
 > Run test query
