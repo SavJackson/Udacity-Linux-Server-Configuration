@@ -209,9 +209,6 @@ Select * from category
 ```
 <img src="Screenshots/Test Query.jpg">
 
-
-> __Fix any errors/typos before moving on__
-
 > Deactivate the virtual environment
 + deactivate
 
