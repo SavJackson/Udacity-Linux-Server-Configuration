@@ -290,7 +290,7 @@ sudo nano /var/www/catalog/catalog/client_secrets.json
 
 + Launch the app again using the DNS and test the login button
 
-Google oauth 2.0 credentials no longer accept xip.io and I could not find any way around not 
+> Google oauth 2.0 credentials no longer accept xip.io and I could not find any way around not 
 having a public top level domain for google to accept for oauth. So I register my own [domain](www.savionj.com) and pointed my domaian's DNS to my Lighsail server IP address. 
 
 <img src="Screenshots/Setu DNS.jpg">
