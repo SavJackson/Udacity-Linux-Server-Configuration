@@ -7,9 +7,16 @@
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
 # Prerequisites 
-> + [AWS Account](https://aws.amazon.com/lightsail/) <br/>
-> + [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/) <br/>
-> + [WinSCP](https://winscp.net/eng/index.php) <br/>
+> + [AWS Account](https://aws.amazon.com/lightsail/)
+> + [Vagrant](https://www.vagrantup.com/)
+> + Ubuntu server
+> + [PostgreSQL](https://www.postgresql.org/)
+> + Web Application
+# IP & Hostname
+URL: www.savionj.com <br/>
+Host Name: http://35.173.115.27 <br/>
+IP Adress: 35.173.115.27 <br/>
+Port: 2200 <br/> 
 # Get your server
 ### Start a new Ubuntu Linux server
 + Create an account and into Amazon Lightsail 
@@ -23,15 +30,15 @@
 
 # SSH into your server
 #### Within your Lightsail terminal 
-1. Download default key
-2. Rename to LightsailDefaultKey.pem
-3. Copy to shared vagrant folder 
++ Download default key
++ Rename to LightsailDefaultKey.pem
++ Copy to shared vagrant folder 
 
 #### Within Vagrant Box
-1. cd /vagrant
-2. sudo mv LightsailDefaultKey.pem ~/.ssh/
-3. sudo chmod 600 ~/.ssh/LightsailDefaultKey.pem
-4. sudo ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@__your static ip__
++ cd /vagrant
++ sudo mv LightsailDefaultKey.pem ~/.ssh/
++ sudo chmod 600 ~/.ssh/LightsailDefaultKey.pem
++ sudo ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@__your static ip__
 
 # Secure your server
 ### Update all currently installed packages
@@ -46,8 +53,8 @@
 #### Within Lightsail terminal
 
 + sudo nano /etc/ssh/sshd_config
-+ uncomment and change the port number on line 5 from 22 to 2200
-  {Picture Here}
++ uncomment and change the port number on line 41 from 22 to 2200
+  <img src="Screenshots/portChange.jpg">
 + confirm line that says PasswordAuthentication is set to 'no'
 + sudo service ssh restart
 + log out of Lightsail terminal
@@ -70,7 +77,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + sudo ufw allow 2200/tcp
 + sudo ufw allow www
 + sudo ufw allow 123/udp
-+    sudo ufw enable
++ sudo ufw enable
 
 # Create a grader user
 ### Within lightsail remote VM
@@ -92,8 +99,8 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 # Create an SSH key pair for grader
 #### Within Vagrant Box
 
-1. ssh-keygen -f ~/.ssh/*linuxCourse*
-2. cat ~/.ssh/linuxCourse.pub
++ ssh-keygen -f ~/.ssh/*linuxCourse*
++ cat ~/.ssh/linuxCourse.pub
 > Copy the key to clipboard
 
 ### Within Lightsail remote VM
@@ -112,7 +119,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + exit
 
 #### Within Vagrant Box
-ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
++ ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
 >  Can log into remote server as grader
 
 # Preration for project deployment 
@@ -134,7 +141,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > psql by default disables the remote connections, but we still need to make sure <br/>
 [PICTURE HERE]
 
-# create a catalog user
+# Create a catalog user
 + sudo adduser catalog (pwd:catalog)
 + sudo touch /etc/sudoers.d/catalog
 + sudo nano /etc/sudoers.d/catalog 
@@ -143,12 +150,13 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 # Create catalog database role and privileges
 
 + sudo -u postgres psql
-> The prompt should say postgres=# <br/>
+> The prompt should say postgres=# 
+``` postgres
   CREATE USER catalog WITH PASSWORD 'catalog'; <br/>
   ALTER User catalog CREATEDB; <br/>
 
   \q
-
+```
 # Install Git
 + sudo apt-get install git
 ## Clone app from GitHub
@@ -168,26 +176,26 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
-> Installs <br/>
-> pip3 install httplib2 <br/>
+> Installs 
+``` ssh 
+> pip3 install httplib2 
 > pip3 install requests <br/>
-> pip3 install --upgrade oauth2client <br/>
-> pip3 install sqlalchemy <br/>
-> pip3 install flask <br/>
-> pip3 install sqlalchemy-utils <br/>
-> sudo apt-get install libpq-dev <br/>
-> pip3 install psycopg2 <br/>
-> pip3 install Flask-SQLAlchemy <br/>
-
+> pip3 install --upgrade oauth2client 
+> pip3 install sqlalchemy 
+> pip3 install flask 
+> pip3 install sqlalchemy-utils 
+> sudo apt-get install libpq-dev 
+> pip3 install psycopg2 
+> pip3 install Flask-SQLAlchemy 
+```
 + sudo -u postgres psql
 
 > Run test query
-
-\c itemcatalog <br/>
-Select * from category <br/>
-> quit
+``` postgres
+\c itemcatalog 
+Select * from category 
 \q
-
+```
 > __Fix any errors/typos before moving on__
 
 > Deactivate the virtual environment
@@ -195,15 +203,15 @@ Select * from category <br/>
 
 # Edit the wsgi.conf to use python 3
 > Add the following line in /etc/apache2/mods-enabled/wsgi.conf file to use Python 3
-
+```
 #WSGIPythonPath directory|directory-1:directory-2:...
 WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
-
+```
 # Create or edit catalog.conf
 + sudo nano into catalog.conf file
 
 > Add or edit the text below 
-
+``` 
 <VirtualHost *:80> <br/>
     ServerName [*your static ip*]  <br/>
     WSGIScriptAlias / /var/www/catalog/catalog.wsgi <br/>
@@ -220,18 +228,17 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
     LogLevel warn <br/>
     CustomLog ${APACHE_LOG_DIR}/access.log combined <br/>
 </VirtualHost>  <br/>
-
+```
 # Disable the default Apache site
-> sudo a2dissite 000-default.conf
+ + sudo a2dissite 000-default.conf
 
 # Activate project app
-> sudo a2ensite catalog
-> sudo service apache2 reload
+ + sudo a2ensite catalog
+ + sudo service apache2 reload
 
 # Create /var/www/catalog/catalog.wsgi file 
-> Add the following lines <br/>
 > it should read like below <br/>
-
+```python
  activate_this = '/var/www/catalog/catalog/venv3/bin/activate_this.py' <br/>
  with open(activate_this) as file_: <br/>
  exec(file_.read(), dict(__file__=activate_this)) <br/>
@@ -245,7 +252,7 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 
  from catalog import app as application <br/>
  application.secret_key = "super_secret_key" <br/>
-
+```
 > restart apache 
 + sudo service apache2 restart
 
