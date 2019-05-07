@@ -199,6 +199,12 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > pip3 install psycopg2 
 > pip3 install Flask-SQLAlchemy 
 ```
+> Execute all three programs, one at a time
+> The first will create the database, the second will insert data, and the third is the main program which will be executed later.
+```
+> python3 /var/www/catalog/catalog/_CreateDatabase.py
+> python3 /var/www/catalog/catalog/_InsertSampleData.py
+```
 + sudo -u postgres psql
 
 > Run test query
@@ -291,8 +297,13 @@ sudo nano /var/www/catalog/catalog/client_secrets.json
 + Launch the app again using the DNS and test the login button
 
 > Google oauth 2.0 credentials no longer accept xip.io and I could not find any way around not 
-having a public top level domain for google to accept for oauth. So I register my own [domain](www.savionj.com) and pointed my domaian's DNS to my Lighsail server IP address. 
+having a public top level domain for google to accept for oauth. So I register my own [domain](www.savionj.com) and pointed my domaian's DNS to my Lightsail server IP address. 
 
 <img src="Screenshots/Setu DNS.jpg">
 
+# References 
+> + https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-16-04
+> + https://www.youtube.com/watch?v=HcwK8IWc-a8
+> + https://ubuntuforums.org/showthread.php?t=1053137
+> + https://libraries.io/github/golgtwins/Udacity-P7-Linux-Server-Configuration
 
