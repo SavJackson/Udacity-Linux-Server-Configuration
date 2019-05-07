@@ -50,6 +50,12 @@
 + sudo apt-get upgrade
 + sudo apt-get autoremove
 
+# Disable ability to log in as root remotely.
++ sudo nano /etc/ssh/sshd_config 
+> uncomment the 'PermitRootLogin' configuration item and set the value to 'no'
+
+<img src="Screenshots/RootLogin.jpg">
+
 # Change the SSH port from 22 to 2200
 > When you change the SSH port, the Lightsail instance will no longer be accessible through the web app 'Connect using SSH' button. 
 
