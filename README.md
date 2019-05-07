@@ -7,10 +7,10 @@
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
 # IP & Hostname
-> + URL: www.savionj.com <br/>
-> + Host Name: http://35.173.115.27 <br/>
-> + IP Adress: 35.173.115.27 <br/>
-> + Port: 2200 <br/> 
+> + URL: www.savionj.com 
+> + Host Name: http://35.173.115.27 
+> + IP Adress: 35.173.115.27
+> + Port: 2200 
 
 # Prerequisites 
 > + [AWS Account](https://aws.amazon.com/lightsail/)
@@ -95,7 +95,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 
 + sudo touch /etc/sudoers.d/grader
 + sudo nano /etc/sudoers.d/grader 
-> type in grader ALL=(ALL:ALL) ALL <br/>
+> type in grader ALL=(ALL:ALL) ALL 
 
 > verify grader has sudo access
 + su grader
@@ -163,7 +163,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > The prompt should say postgres=# 
 ``` postgres
   CREATE USER catalog WITH PASSWORD 'catalog'; 
-  ALTER User catalog CREATEDB; <br/>
+  ALTER User catalog CREATEDB; 
 
   \q
 ```
@@ -226,7 +226,7 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
 
 > Add or edit the text below 
 ``` 
-<VirtualHost *:80> <br/>
+<VirtualHost *:80> 
     ServerName [*your static ip*] 
     WSGIScriptAlias / /var/www/catalog/catalog.wsgi 
     <Directory /var/www/catalog/catalog/> 
@@ -251,21 +251,21 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
  + sudo service apache2 reload
 
 # Create /var/www/catalog/catalog.wsgi file 
-> it should read like below <br/>
+> it should read like below 
 ```python
- activate_this = '/var/www/catalog/catalog/venv3/bin/activate_this.py' <br/>
- with open(activate_this) as file_: <br/>
- exec(file_.read(), dict(__file__=activate_this)) <br/>
+ activate_this = '/var/www/catalog/catalog/venv3/bin/activate_this.py' 
+ with open(activate_this) as file_: 
+ exec(file_.read(), dict(__file__=activate_this)) 
 
- #!/usr/bin/python <br/>
- import sys <br/>
- import logging <br/>
- logging.basicConfig(stream=sys.stderr) <br/>
- sys.path.insert(0, "/var/www/catalog/catalog/") <br/>
-sys.path.insert(1, "/var/www/catalog/") <br/>
+ #!/usr/bin/python 
+ import sys
+ import logging 
+ logging.basicConfig(stream=sys.stderr)
+ sys.path.insert(0, "/var/www/catalog/catalog/") 
+sys.path.insert(1, "/var/www/catalog/")
 
- from catalog import app as application <br/>
- application.secret_key = "super_secret_key" <br/>
+ from catalog import app as application 
+ application.secret_key = "super_secret_key" 
 ```
 > restart apache 
 + sudo service apache2 restart
