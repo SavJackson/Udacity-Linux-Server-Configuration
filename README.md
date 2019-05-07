@@ -199,10 +199,10 @@ Select * from category
 
 # Edit the wsgi.conf to use python 3
 > Add the following line in /etc/apache2/mods-enabled/wsgi.conf file to use Python 3
-
+```
 #WSGIPythonPath directory|directory-1:directory-2:...
 WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
-
+```
 # Create or edit catalog.conf
 + sudo nano into catalog.conf file
 
