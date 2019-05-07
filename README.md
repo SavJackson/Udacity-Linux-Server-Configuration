@@ -33,7 +33,7 @@ Port: 2200 <br/>
 + Download default key
 + Rename to LightsailDefaultKey.pem
 + Copy to shared vagrant folder 
-
+<img src="Screenshots/Create private Key.jpg">
 #### Within Vagrant Box
 + cd /vagrant
 + sudo mv LightsailDefaultKey.pem ~/.ssh/
@@ -63,7 +63,7 @@ Port: 2200 <br/>
 1. Click __networking__ within your AWS Instance
 2. Under Firewall, click 'Add another'
 3. Add a custom TCP with port 2200
-
+<img src="Screenshots/Lightsail2.jpg">
 #### Within Vagrant Box
 ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p 2200
 
@@ -126,7 +126,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 ## Configure local timezone
 #### Within Vagrant Box
 > sudo dpkg-reconfigure tzdata
-  [pictere here! ]
+ <img src="Screenshots/Set time.jpg">
   
 # Install Apache
 + sudo apt install apache2
@@ -176,6 +176,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
+
 > Installs 
 ``` ssh 
 > pip3 install httplib2 
@@ -196,6 +197,8 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 Select * from category 
 \q
 ```
+<img src="Screenshots/Test Query.jpg">
+
 > __Fix any errors/typos before moving on__
 
 > Deactivate the virtual environment
@@ -261,4 +264,20 @@ sys.path.insert(1, "/var/www/catalog/") <br/>
 + sudo chown -R www-data:www-data catalog/
 + sudo service apache2 restart
 
-> Go to the browser and enter http://your.static.ip }
+> Go to the browser and enter http://your.static.ip 
+
+# Fixing Google Login 
++ Edit Google app settings
++ Download and save new cliet_secrets.json
++ Edit GoDaddy domain DNS to point to IP address
+<img src="Screenshots/Setu DNS.jpg">
+#### Edit the client_secrets.json
+```
+sudo nano /var/www/catalog/catalog/client_secrets.json
+```
++ Delete all of the file contents
++ Copy and paste the new info into the file and save
+
++ Launch the app again using the DNS and test the login button
+
+<img src="Screenshots/Google OAuth.jpg">
