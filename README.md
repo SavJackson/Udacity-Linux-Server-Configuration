@@ -7,8 +7,11 @@
 > Learned how to access, secure, and perform the initial configuration of a bare-bones Linux server. How to install and configure a web and database server and actually host a web application.
 
 # Prerequisites 
-> + [AWS Account](https://aws.amazon.com/lightsail/) <br/>
-> + [Vagrant]
+> + [AWS Account](https://aws.amazon.com/lightsail/)
+> + [Vagrant](https://www.vagrantup.com/)
+> + Ubuntu server
+> + PostgreSQL(https://www.postgresql.org/)
+> + Web Application
 
 # Get your server
 ### Start a new Ubuntu Linux server
@@ -23,15 +26,15 @@
 
 # SSH into your server
 #### Within your Lightsail terminal 
-1. Download default key
-2. Rename to LightsailDefaultKey.pem
-3. Copy to shared vagrant folder 
++ Download default key
++ Rename to LightsailDefaultKey.pem
++ Copy to shared vagrant folder 
 
 #### Within Vagrant Box
-1. cd /vagrant
-2. sudo mv LightsailDefaultKey.pem ~/.ssh/
-3. sudo chmod 600 ~/.ssh/LightsailDefaultKey.pem
-4. sudo ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@__your static ip__
++ cd /vagrant
++ sudo mv LightsailDefaultKey.pem ~/.ssh/
++ sudo chmod 600 ~/.ssh/LightsailDefaultKey.pem
++ sudo ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@__your static ip__
 
 # Secure your server
 ### Update all currently installed packages
@@ -92,8 +95,8 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 # Create an SSH key pair for grader
 #### Within Vagrant Box
 
-1. ssh-keygen -f ~/.ssh/*linuxCourse*
-2. cat ~/.ssh/linuxCourse.pub
++ ssh-keygen -f ~/.ssh/*linuxCourse*
++ cat ~/.ssh/linuxCourse.pub
 > Copy the key to clipboard
 
 ### Within Lightsail remote VM
@@ -112,7 +115,7 @@ ssh -i /home/vagrant/.ssh/LightsailDefaultKey.pem ubuntu@(__your static ip__) -p
 + exit
 
 #### Within Vagrant Box
-ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
++ ssh -i /home/vagrant/.ssh/linuxCourse grader@__your static ip__ -p 2200
 >  Can log into remote server as grader
 
 # Preration for project deployment 
@@ -134,7 +137,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 > psql by default disables the remote connections, but we still need to make sure <br/>
 [PICTURE HERE]
 
-# create a catalog user
+# Create a catalog user
 + sudo adduser catalog (pwd:catalog)
 + sudo touch /etc/sudoers.d/catalog
 + sudo nano /etc/sudoers.d/catalog 
@@ -169,7 +172,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo chown -R grader:grader venv3/<br/>
 
 + source venv3/bin/activate
-
+> Installs 
 ``` ssh 
 > pip3 install httplib2 
 > pip3 install requests <br/>
@@ -184,12 +187,11 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf <br/>
 + sudo -u postgres psql
 
 > Run test query
-
-\c itemcatalog <br/>
-Select * from category <br/>
-> quit
+``` postgres
+\c itemcatalog 
+Select * from category 
 \q
-
+```
 > __Fix any errors/typos before moving on__
 
 > Deactivate the virtual environment
@@ -205,7 +207,7 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
 + sudo nano into catalog.conf file
 
 > Add or edit the text below 
-
+``` 
 <VirtualHost *:80> <br/>
     ServerName [*your static ip*]  <br/>
     WSGIScriptAlias / /var/www/catalog/catalog.wsgi <br/>
@@ -222,16 +224,15 @@ WSGIPythonPath /var/www/catalog/catalog/venv3/lib/python3.6/site-packages
     LogLevel warn <br/>
     CustomLog ${APACHE_LOG_DIR}/access.log combined <br/>
 </VirtualHost>  <br/>
-
+```
 # Disable the default Apache site
-> sudo a2dissite 000-default.conf
+ + sudo a2dissite 000-default.conf
 
 # Activate project app
-> sudo a2ensite catalog
-> sudo service apache2 reload
+ + sudo a2ensite catalog
+ + sudo service apache2 reload
 
 # Create /var/www/catalog/catalog.wsgi file 
-> Add the following lines <br/>
 > it should read like below <br/>
 ```python
  activate_this = '/var/www/catalog/catalog/venv3/bin/activate_this.py' <br/>
