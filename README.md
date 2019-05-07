@@ -46,8 +46,8 @@
 #### Within Lightsail terminal
 
 + sudo nano /etc/ssh/sshd_config
-+ uncomment and change the port number on line 5 from 22 to 2200
-  {Picture Here}
++ uncomment and change the port number on line 41 from 22 to 2200
+  <img src="Screenshots/portChange.JPG">
 + confirm line that says PasswordAuthentication is set to 'no'
 + sudo service ssh restart
 + log out of Lightsail terminal
